@@ -1,0 +1,13 @@
+<div id="profile-view" class="card shadow">
+    <div class="card-body">
+        <h5 class="card-title">Profile</h5>
+        <p class="card-text"><strong>Bio:</strong> {{ form.instance.bio }}</p>
+        <p class="card-text"><strong>Profession:</strong> {{ form.instance.profession }}</p>
+        <!-- Add more fields as needed -->
+        <button id="edit-btn" class="btn btn-primary">Edit</button>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+    </div>
+</div>
+
+
+

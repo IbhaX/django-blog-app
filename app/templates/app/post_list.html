@@ -1,0 +1,73 @@
+{% extends 'index/base.html' %}
+
+{% block content %}
+  <div class="container mt-5">
+    <div class="col-md-10">
+      <h1>Posts</h1>
+    </div>
+      
+
+    <div class="row">
+      <div class="col-md-4">
+      <!-- Search Form -->
+        <form method="get" action="{% url 'app:post-list' %}" class="mb-3">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" name="search" value="{{ request.GET.search }}">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-md-4">
+        <!-- Filter Form -->
+        <form method="get" action="{% url 'app:post-list' %}" class="mb-3">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Filter by author" name="author" value="{{ request.GET.author }}">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="submit">Filter</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-md-2">
+        <a href="{% url 'app:post-create' %}" class="btn btn-primary btn-sm">Create Post</a>
+      </div>
+    </div>
+
+    {% for post in posts %}
+      <div class="card mb-4 shadow mt-2">
+        <div class="card-body">
+          <h2 class="card-title">{{ post.title|title }}</h2>
+          <a href="{% url 'app:post-detail' pk=post.pk %}" class="btn btn-primary">Read more</a>
+
+          <!-- Like and Dislike buttons with Font Awesome icons -->
+          <div class="row mt-3">
+            <form method="post" action="{% url 'app:like-post' pk=post.pk %}" class="col-md-2 d-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-light">
+                <i class="fas fa-thumbs-up"></i> {{ post.like_count }} Likes
+              </button>
+            </form>
+
+            <form method="post" action="{% url 'app:dislike-post' pk=post.pk %}" class="col-md-2 d-inline">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-light">
+                <i class="fas fa-thumbs-down"></i> {{ post.dislike_count }} Dislikes
+              </button>
+            </form>
+
+            <p class="col-md-1 card-text"><small class="text-muted">{{ post.author.username }}</small></p>
+            <p class="col-md-3 card-text">
+              <small class="text-muted">
+                {{ post.created_at|date:"D d, F Y @g:i A" }}
+              </small>
+            </p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

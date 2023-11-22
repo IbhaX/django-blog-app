@@ -1,0 +1,24 @@
+/* Hide scrollbar for Chrome, Safari, and Edge */
+.card-text::-webkit-scrollbar {
+    display: none;
+}
+
+/* Optional: Let's assume you want to style the scrollbar for Firefox */
+.card-text {
+    scrollbar-width: none; /* Firefox */
+}
+
+/* Optional: You can add some styles to the container if needed */
+.card-text .detail {
+    max-height: 400px;
+    overflow: auto;
+}
+
+.card-text {
+    max-height: 200px;
+    overflow: auto;
+}
+
+body {
+    background: red;
+}

@@ -1,0 +1,15 @@
+{% extends 'index/base.html' %}
+
+
+{% block content %}
+    <h1 class="container-fluid col-md-4">Employee details</h1>
+    <div class="container-fluid col-md-8">
+        <div class="card bg-light col-md-4" style="max-width: 30rem;">
+            <div class="card-header">{{ employee.first_name}} {% if employee.last_name %} {{ employee.last_name}} {% endif %}</div>
+            <div class="card-body">
+              <h5 class="card-title">Role: {{ employee.role }}</h5>
+              <p class="card-text">Salary: {{ employee.salary }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
